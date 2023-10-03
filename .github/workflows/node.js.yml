@@ -25,7 +25,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm ci
+      - run: npm install
       - run: npm run build --if-present
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
+      - name: Package Application
+        run: |
+          zip -r my-app.zip dist/*
+          mv my-app.zip $GITHUB_WORKSPACE
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-app
+          path: $GITHUB_WORKSPACE/my-app.zip
