@@ -6,7 +6,7 @@ interface Task {
   id: number;
   task: string;
   completed: boolean;
-  createdAt: Date; // Add createdAt property
+  createdAt: Date;
 }
 
 interface ToDoProps {
@@ -22,11 +22,6 @@ const Todo: React.FC<ToDoProps> = ({
   deleteTodo,
   editTodo,
 }) => {
-  // const currentTime = new Date();
-  // const formattedTime = currentTime.toLocaleTimeString([], {
-  //   hour: "2-digit",
-  //   minute: "2-digit",
-  // });
   return (
     <div className="bg-blue-700 text-white text-lg w-full my-2 px-4 py-2 rounded-lg flex justify-between items-center cursor-pointer shadow-lg">
       <p

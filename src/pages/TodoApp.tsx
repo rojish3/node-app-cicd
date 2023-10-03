@@ -37,7 +37,7 @@ const TodoApp: React.FC = () => {
     );
   }, [search, todos]);
 
-  const storeItems = (items) => {
+  const storeItems = (items: void) => {
     localStorage.setItem("todos", JSON.stringify(items));
   };
 
