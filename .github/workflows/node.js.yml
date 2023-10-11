@@ -43,6 +43,6 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
-          name: blog-application
+          name: react-application
       - name: Test artifact download
         run: ls -R
