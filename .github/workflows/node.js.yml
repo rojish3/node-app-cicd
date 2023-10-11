@@ -1,4 +1,4 @@
-name: Node.js CI
+name: React-application CICD
 
 on:
   push:
@@ -6,35 +6,55 @@ on:
   pull_request:
     branches: ["main"]
 
+
 jobs:
+  # #Test Project
+  # test-project:
+  #   name: Test Project
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+
+  #     - name: Install Dependencies
+  #       working-directory: ./fe
+  #       run: npm install
+
+  #     #Test Project
+  #     - name: Unit test
+  #       working-directory: ./fe
+  #       run: npm test
+
+  #Build project
   build-project:
     name: Build Project
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.16.0]
-       
     steps:
+      #Checkout the code from github repository
       - name: Checkout code
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
+        uses: actions/checkout@v3
+
+      #Install dependencies for client application
       - name: Install dependencies
         run: npm install
 
-      - name: Build Project
-      - run: npm run build --if-present
-
+      #Build client application
+      - name: Build application
+        run: npm run build
+      - name: List Files and Folders in dist/
+        run: |
+          cd $GITHUB_WORKSPACE/fe/dist
+          ls
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: react-application
-          path: ./dist
+          path: ./dist/
 
+
+  #Create downloadable artifact
   release-project:
     name: Release Project
     runs-on: ubuntu-latest
