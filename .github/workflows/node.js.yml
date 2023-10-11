@@ -45,7 +45,7 @@ jobs:
         run: npm run build
       - name: List Files and Folders in dist/
         run: |
-          cd $GITHUB_WORKSPACE/fe/dist
+          cd $GITHUB_WORKSPACE/dist
           ls
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
