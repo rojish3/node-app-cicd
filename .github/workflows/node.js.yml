@@ -8,23 +8,21 @@ on:
 
 
 jobs:
-  # #Test Project
-  # test-project:
-  #   name: Test Project
-  #   runs-on: ubuntu-latest
+  #Test Project
+  test-project:
+    name: Test Project
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-  #     - name: Install Dependencies
-  #       working-directory: ./fe
-  #       run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-  #     #Test Project
-  #     - name: Unit test
-  #       working-directory: ./fe
-  #       run: npm test
+      #Test Project
+      - name: Unit test
+        run: npm test
 
   #Build project
   build-project:
