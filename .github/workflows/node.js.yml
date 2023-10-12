@@ -72,11 +72,11 @@ jobs:
       - name: Build Docker Image
         run: |
           docker build -t reactapp:latest .
-        working-directory: /github/workspace
+        working-directory: ./
       - name: Save Docker Image
         run: |
           docker save -o reactapp.tar reactapp:latest mv reactapp.tar $GITHUB_WORKSPACE/
-        working-directory: /github/workspace
+        working-directory: ./
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
