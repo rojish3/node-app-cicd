@@ -63,9 +63,10 @@ jobs:
       - name: Test artifact download
         run: ls -R
 
+  #Dockerize project
   dockerize-project:
     name: Dockerize Project
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     needs: test-project
     steps:
       - name: Dockerize Project
