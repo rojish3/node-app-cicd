@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: ["main"]
 
-
 jobs:
   #Test Project
   test-project:
@@ -51,10 +50,9 @@ jobs:
           name: react-application
           path: ./dist/
 
-
   #Create downloadable artifact
   release-project:
-    name: Release Project
+    name: Downloadable Artifact
     runs-on: ubuntu-latest
     needs: build-project
     steps:
@@ -64,3 +62,23 @@ jobs:
           name: react-application
       - name: Test artifact download
         run: ls -R
+
+  dockerize-project:
+    name: Dockerize Project
+    runs-on: ubuntu-lates
+    needs: test-project
+    steps:
+      - name: Dockerize Project
+        run: |
+          docker build -t reactapp-${{github.run_number}} .
+
+      - name: Save Docker Image
+        run: |
+          docker save -o reactapp.tar reactapp-${{github.run_number}} mv reactapp.tar $GITHUB_WORKSPACE/
+        working-directory: /github/workspace
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker-image
+          path: $GITHUB_WORKSPACE/reactapp.tar
